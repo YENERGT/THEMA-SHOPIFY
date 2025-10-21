@@ -1,0 +1,264 @@
+{% comment %}
+  Sección de texto flotante con animación sobre fondo negro
+{% endcomment %}
+
+{{ 'loading-text.css' | asset_url | stylesheet_tag }}
+
+<div class="loading-text-section">
+  <div class="page-width">
+    <div class="animated-text-container">
+      <div class="loader">
+        <h2 class="fixed-text">{{ section.settings.fixed_text }}</h2>
+        <div class="words">
+          <h2 class="word">{{ section.settings.variable_text1 }}</h2>
+          <h2 class="word">{{ section.settings.variable_text2 }}</h2>
+          <h2 class="word">{{ section.settings.variable_text3 }}</h2>
+          <h2 class="word">{{ section.settings.variable_text4 }}</h2>
+          <h2 class="word">{{ section.settings.variable_text5 }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Texto Animado Fondo Negro",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "fixed_text",
+      "label": "Texto fijo",
+      "default": "REPUESTOS"
+    },
+    {
+      "type": "text",
+      "id": "variable_text1",
+      "label": "Texto variable 1",
+      "default": "originales"
+    },
+    {
+      "type": "text",
+      "id": "variable_text2",
+      "label": "Texto variable 2",
+      "default": "garantizados"
+    },
+    {
+      "type": "text",
+      "id": "variable_text3",
+      "label": "Texto variable 3",
+      "default": "económicos"
+    },
+    {
+      "type": "text",
+      "id": "variable_text4",
+      "label": "Texto variable 4",
+      "default": "de calidad"
+    },
+    {
+      "type": "text",
+      "id": "variable_text5",
+      "label": "Texto variable 5",
+      "default": "disponibles"
+    },
+    {
+      "type": "color",
+      "id": "fixed_text_color",
+      "label": "Color del texto fijo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "variable_text_color",
+      "label": "Color del texto variable",
+      "default": "#956afa"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Grosor de fuente",
+      "options": [
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        },
+        {
+          "value": "900",
+          "label": "Black"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Espacio vertical",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Texto Animado Fondo Negro",
+      "category": "Custom Content"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+/* Importamos la fuente Montserrat de Google con varios pesos */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap');
+
+.loading-text-section {
+  background-color: #000000; /* Fondo negro */
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+  padding-top: {{ section.settings.padding }}px;
+  padding-bottom: {{ section.settings.padding }}px;
+}
+
+.animated-text-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.loading-text-section .loader {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: {{ section.settings.font_weight }};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  flex-wrap: nowrap; /* Asegurar que no se envuelvan los elementos */
+}
+
+.loading-text-section .fixed-text {
+  margin: 0;
+  padding-right: 15px;
+  font-size: 38px;
+  color: {{ section.settings.fixed_text_color }};
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+}
+
+.loading-text-section .words {
+  overflow: hidden;
+  position: relative;
+  height: 45px;
+  flex-shrink: 0; /* Evita que este contenedor se contraiga demasiado */
+}
+
+.loading-text-section .words::after,
+.loading-text-section .words::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.loading-text-section .words::before {
+  top: 0;
+  height: 20%;
+  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); /* Adaptado para fondo negro */
+}
+
+.loading-text-section .words::after {
+  bottom: 0;
+  height: 20%;
+  background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); /* Adaptado para fondo negro */
+}
+
+.loading-text-section .word {
+  display: block;
+  height: 100%;
+  margin: 0;
+  color: {{ section.settings.variable_text_color }};
+  animation: spin_words 4s infinite;
+  font-size: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: {{ section.settings.font_weight }};
+  white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+}
+
+@keyframes spin_words {
+  10% {
+    transform: translateY(-102%);
+  }
+  25% {
+    transform: translateY(-100%);
+  }
+  35% {
+    transform: translateY(-202%);
+  }
+  50% {
+    transform: translateY(-200%);
+  }
+  60% {
+    transform: translateY(-302%);
+  }
+  75% {
+    transform: translateY(-300%);
+  }
+  85% {
+    transform: translateY(-402%);
+  }
+  100% {
+    transform: translateY(-400%);
+  }
+}
+
+/* Media query para pantallas pequeñas/móviles */
+@media screen and (max-width: 749px) {
+  .loading-text-section .loader {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .loading-text-section .fixed-text {
+    font-size: 18px; /* Reducir tamaño considerablemente para móviles */
+    padding-right: 5px; /* Reducir espaciado */
+  }
+  
+  .loading-text-section .word {
+    font-size: 16px; /* Reducir tamaño considerablemente para móviles */
+  }
+  
+  .loading-text-section .words {
+    height: 30px; /* Reducir altura del contenedor de palabras */
+  }
+}
+
+/* Media query adicional para pantallas muy pequeñas */
+@media screen and (max-width: 480px) {
+  .loading-text-section .fixed-text {
+    font-size: 16px; /* Aún más pequeño para pantallas muy pequeñas */
+  }
+  
+  .loading-text-section .word {
+    font-size: 14px; /* Aún más pequeño para pantallas muy pequeñas */
+  }
+  
+  .loading-text-section .words {
+    height: 25px; /* Reducir aún más la altura */
+  }
+}
+</style>
