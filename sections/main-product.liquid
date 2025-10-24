@@ -760,27 +760,13 @@ cambia de variante.
 </product-info>
 
 {%- comment -%}
-STRUCTURED DATA PARA REVIEWS - CORREGIDO PARA GOOGLE SEARCH CONSOLE
-Solo genera structured data de reviews cuando hay datos válidos
+SCHEMA ELIMINADO - Ahora se gestiona centralmente en snippets/avada-seo-structured.liquid
+Esto evita duplicación y conflictos con Google Search Console
+El schema de AVADA incluye soporte para:
+- Shopify Native Reviews (product.metafields.reviews)
+- Ryviu, Stamped, SCM Review Importer
+- Revie Reviews
 {%- endcomment -%}
-{%- assign rating_value = product.metafields.reviews.rating.value.rating | plus: 0 -%}
-{%- assign review_count = product.metafields.reviews.rating_count | plus: 0 -%}
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org/",
-  "@type": "Product",
-  "name": "{{ product.title | escape }}"
-  {%- if rating_value > 0 and review_count > 0 -%}
-  ,
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "{{ rating_value }}",
-    "reviewCount": "{{ review_count }}"
-  }
-  {%- endif -%}
-}
-</script>
 
 {% schema %}
 {

@@ -86,6 +86,32 @@
 }
 {%- endif -%}
 
+{%- comment -%} Shopify Native Reviews (product.metafields.reviews) {%- endcomment -%}
+{%- assign shopify_rating_value = product.metafields.reviews.rating.value.rating | plus: 0 -%}
+{%- assign shopify_review_count = product.metafields.reviews.rating_count | plus: 0 -%}
+{%- if shopify_review_count > 0 and shopify_rating_value > 0 and shopify_rating_value <= 5 and avada_product_review == false -%}
+{%- assign avada_product_review = true -%}
+,
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "{{ shopify_rating_value }}",
+  "reviewCount": "{{ shopify_review_count }}"
+}
+{%- endif -%}
+
+{%- comment -%} Revie Reviews (posibles namespaces) {%- endcomment -%}
+{%- assign revie_rating = product.metafields.revie.rating | plus: 0 -%}
+{%- assign revie_count = product.metafields.revie.count | plus: 0 -%}
+{%- if revie_count > 0 and revie_rating > 0 and revie_rating <= 5 and avada_product_review == false -%}
+{%- assign avada_product_review = true -%}
+,
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "{{ revie_rating }}",
+  "reviewCount": "{{ revie_count }}"
+}
+{%- endif -%}
+
 }
 {%- endif -%}
 
