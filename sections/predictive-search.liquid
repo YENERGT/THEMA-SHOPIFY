@@ -142,7 +142,7 @@
                     tabindex="-1"
                   >
                     {%- if product.featured_media != blank -%}
-                      <img
+                      <img loading="lazy"
                         class="predictive-search__image"
                         src="{{ product.featured_media | image_url: width: 150 }}"
                         alt="{{ product.featured_media.alt | escape }}"

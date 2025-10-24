@@ -18,13 +18,13 @@
       </h1>
 
       {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
+        <div class="collection-hero__description rte">{{ collection.description | replace: '<img', '<img loading="lazy"' }}</div>
       {%- endif -%}
     </div>
 
     {%- if section.settings.show_collection_image and collection.image -%}
       <div class="collection-hero__image-container media gradient">
-        <img
+        <img loading="lazy"
           srcset="
             {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
             {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}

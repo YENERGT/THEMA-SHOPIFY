@@ -42,7 +42,7 @@
   {%- endstyle -%}
 
   <script src="{{ 'product-info.aio.min.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'show-more.aio.min.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'price-per-item.aio.min.js' | asset_url }}" defer="defer"></script>
 
   {% comment %} TODO: assign `product.selected_or_first_available_variant` to variable and replace usage to reduce verbosity {% endcomment %}
@@ -483,7 +483,7 @@
 
   {% if product.media.size > 0 %}
     <script src="{{ 'product-modal.aio.min.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'media-gallery.aio.min.js' | asset_url }}" defer="defer"></script>
   {% endif %}
 </product-info>
 

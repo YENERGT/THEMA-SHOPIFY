@@ -43,7 +43,7 @@
   <script src="{{ 'product-info.aio.min.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.aio.min.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
-    <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'show-more.aio.min.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'price-per-item.aio.min.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
@@ -690,7 +690,7 @@ cambia de variante.
                   {{ 'component-complementary-products.aio.min.css' | asset_url | stylesheet_tag }}
                   {%- if block.settings.enable_quick_add -%}
                     {{ 'quick-add.aio.min.css' | asset_url | stylesheet_tag }}
-                    <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+                    <script src="{{ 'quick-add.aio.min.js' | asset_url }}" defer="defer"></script>
                   {%- endif -%}
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
@@ -735,7 +735,7 @@ cambia de variante.
 
     {%- if product.media.size > 0 -%}
       <script src="{{ 'product-modal.aio.min.js' | asset_url }}" defer="defer"></script>
-      <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'media-gallery.aio.min.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
     {%- if first_3d_model -%}
