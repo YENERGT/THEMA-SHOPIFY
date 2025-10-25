@@ -1,12 +1,12 @@
 <script>
   const avadaLightJsExclude = ['cdn.nfcube.com', 'assets/ecom.js', 'variant-title-king', 'linked_options_variants', 'smile-loader.js', 'smart-product-filter-search', 'rivo-loyalty-referrals', 'avada-cookie-consent', 'consentmo-gdpr', 'quinn', 'pandectes'];
-  const avadaLightJsInclude = ['https://www.googletagmanager.com/', 'https://connect.facebook.net/', 'https://business-api.tiktok.com/', 'https://static.klaviyo.com/'];
+  const avadaLightJsInclude = ['https://www.googletagmanager.com/', 'https://connect.facebook.net/', 'https://business-api.tiktok.com/', 'https://static.klaviyo.com/', 'https://searchanise-ef84.kxcdn.com/snize-autocomplete.93021.min.js', 'https://maps.googleapis.com/maps-api-v3/api/js/62/11d/map.js', 'https://maps.gstatic.com/maps-api-v3/embed/js/62/11d/init_embed.js', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', 'https://maps.googleapis.com/maps-api-v3/api/js/62/11d/main.js', 'https://maps.googleapis.com/maps-api-v3/api/js/62/11d/geometry.js', 'https://maps.googleapis.com/maps-api-v3/api/js/62/11d/search.js', 'https://maps.googleapis.com/maps-api-v3/api/js/62/11d/util.js'];
   window.AVADA_SPEED_BLACKLIST = avadaLightJsInclude.map(item => new RegExp(item, 'i'));
   window.AVADA_SPEED_WHITELIST = avadaLightJsExclude.map(item => new RegExp(item, 'i'));
 </script>
 
 <script>
-  const isSpeedUpEnable = !1761377477147 || Date.now() < 1761377477147;
+  const isSpeedUpEnable = !1761550280231 || Date.now() < 1761550280231;
   if (isSpeedUpEnable) {
     const avadaSpeedUp=1;
     if(isSpeedUpEnable) {
@@ -17,7 +17,7 @@ new LightJsLoader(["keydown","mousemove","touchend","touchmove","touchstart","wh
   }
 </script>
 
-{%- assign lightJsReplace = "if ((!1761377477147 || Date.now() < 1761377477147) &&
+{%- assign lightJsReplace = "if ((!1761550280231 || Date.now() < 1761550280231) &&
       (!window.AVADA_SPEED_BLACKLIST || window.AVADA_SPEED_BLACKLIST.some(pattern => pattern.test(s))) &&
       (!window.AVADA_SPEED_WHITELIST || window.AVADA_SPEED_WHITELIST.every(pattern => !pattern.test(s)))) s.type = 'lightJs'; else s.type = 'text/javascript'" -%}
 {%- assign lightJsContent = content_for_header | split: 'asyncLoad()' -%}
