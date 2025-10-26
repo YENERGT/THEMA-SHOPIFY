@@ -1,8 +1,25 @@
 {% comment %}
   Sección de texto flotante con animación sobre fondo negro
+  Optimizado para Core Web Vitals en móvil
 {% endcomment %}
 
-{{ 'loading-text.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Preload font only for the weight being used {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght={{ section.settings.font_weight }}&display=swap"
+>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght={{ section.settings.font_weight }}&display=swap"
+  media="print"
+  onload="this.media='all'"
+>
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght={{ section.settings.font_weight }}&display=swap">
+</noscript>
 
 <div class="loading-text-section">
   <div class="page-width">
@@ -120,8 +137,7 @@
 {% endschema %}
 
 <style>
-/* Importamos la fuente Montserrat de Google con varios pesos */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap');
+/* Optimized for mobile Core Web Vitals - Font loaded via preload above */
 
 .loading-text-section {
   background-color: #000000; /* Fondo negro */
@@ -197,6 +213,11 @@
   font-family: 'Montserrat', sans-serif;
   font-weight: {{ section.settings.font_weight }};
   white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+
+  /* Hardware acceleration for smooth animations on mobile */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 @keyframes spin_words {

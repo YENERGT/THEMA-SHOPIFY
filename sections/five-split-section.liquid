@@ -1,24 +1,119 @@
-<!-- five-split-section.liquid -->
+<!-- five-split-section.liquid - Optimized for mobile Core Web Vitals -->
 <div class="five-split-container">
-  <div class="split-section section1">
-    <h2>{{ section.settings.heading1 }}</h2>
-    <a href="{{ section.settings.button_link1 }}" class="btn">{{ section.settings.button_text1 }}</a>
+  <div class="split-section section1" data-section="1">
+    {%- if section.settings.image1 -%}
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcset="{{ section.settings.image1 | image_url: width: 800 }}"
+        >
+        <img
+          src="{{ section.settings.image1 | image_url: width: 1200 }}"
+          alt="{{ section.settings.heading1 }}"
+          loading="lazy"
+          decoding="async"
+          class="section-bg-image"
+          width="800"
+          height="400"
+        >
+      </picture>
+    {%- endif -%}
+    <div class="section-content">
+      <h2>{{ section.settings.heading1 }}</h2>
+      <a href="{{ section.settings.button_link1 }}" class="btn">{{ section.settings.button_text1 }}</a>
+    </div>
   </div>
-  <div class="split-section section2">
-    <h2>{{ section.settings.heading2 }}</h2>
-    <a href="{{ section.settings.button_link2 }}" class="btn">{{ section.settings.button_text2 }}</a>
+  <div class="split-section section2" data-section="2">
+    {%- if section.settings.image2 -%}
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcset="{{ section.settings.image2 | image_url: width: 800 }}"
+        >
+        <img
+          src="{{ section.settings.image2 | image_url: width: 1200 }}"
+          alt="{{ section.settings.heading2 }}"
+          loading="lazy"
+          decoding="async"
+          class="section-bg-image"
+          width="800"
+          height="400"
+        >
+      </picture>
+    {%- endif -%}
+    <div class="section-content">
+      <h2>{{ section.settings.heading2 }}</h2>
+      <a href="{{ section.settings.button_link2 }}" class="btn">{{ section.settings.button_text2 }}</a>
+    </div>
   </div>
-  <div class="split-section section3">
-    <h2>{{ section.settings.heading3 }}</h2>
-    <a href="{{ section.settings.button_link3 }}" class="btn">{{ section.settings.button_text3 }}</a>
+  <div class="split-section section3" data-section="3">
+    {%- if section.settings.image3 -%}
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcset="{{ section.settings.image3 | image_url: width: 800 }}"
+        >
+        <img
+          src="{{ section.settings.image3 | image_url: width: 1200 }}"
+          alt="{{ section.settings.heading3 }}"
+          loading="lazy"
+          decoding="async"
+          class="section-bg-image"
+          width="800"
+          height="400"
+        >
+      </picture>
+    {%- endif -%}
+    <div class="section-content">
+      <h2>{{ section.settings.heading3 }}</h2>
+      <a href="{{ section.settings.button_link3 }}" class="btn">{{ section.settings.button_text3 }}</a>
+    </div>
   </div>
-  <div class="split-section section4">
-    <h2>{{ section.settings.heading4 }}</h2>
-    <a href="{{ section.settings.button_link4 }}" class="btn">{{ section.settings.button_text4 }}</a>
+  <div class="split-section section4" data-section="4">
+    {%- if section.settings.image4 -%}
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcset="{{ section.settings.image4 | image_url: width: 800 }}"
+        >
+        <img
+          src="{{ section.settings.image4 | image_url: width: 1200 }}"
+          alt="{{ section.settings.heading4 }}"
+          loading="lazy"
+          decoding="async"
+          class="section-bg-image"
+          width="800"
+          height="400"
+        >
+      </picture>
+    {%- endif -%}
+    <div class="section-content">
+      <h2>{{ section.settings.heading4 }}</h2>
+      <a href="{{ section.settings.button_link4 }}" class="btn">{{ section.settings.button_text4 }}</a>
+    </div>
   </div>
-  <div class="split-section section5">
-    <h2>{{ section.settings.heading5 }}</h2>
-    <a href="{{ section.settings.button_link5 }}" class="btn">{{ section.settings.button_text5 }}</a>
+  <div class="split-section section5" data-section="5">
+    {%- if section.settings.image5 -%}
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcset="{{ section.settings.image5 | image_url: width: 800 }}"
+        >
+        <img
+          src="{{ section.settings.image5 | image_url: width: 1200 }}"
+          alt="{{ section.settings.heading5 }}"
+          loading="lazy"
+          decoding="async"
+          class="section-bg-image"
+          width="800"
+          height="400"
+        >
+      </picture>
+    {%- endif -%}
+    <div class="section-content">
+      <h2>{{ section.settings.heading5 }}</h2>
+      <a href="{{ section.settings.button_link5 }}" class="btn">{{ section.settings.button_text5 }}</a>
+    </div>
   </div>
 </div>
 
@@ -56,11 +151,34 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: all var(--speed) ease-in-out;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    /* Optimized: only transition the property that changes */
+    transition: flex var(--speed) ease-in-out;
     overflow: hidden;
+    /* Hardware acceleration */
+    will-change: flex;
+    transform: translateZ(0);
+  }
+
+  /* Background images now handled by <img> tags for lazy loading */
+  .section-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    /* Smooth image rendering on mobile */
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  .section-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .split-section::before {
@@ -70,40 +188,28 @@
     height: 100%;
     top: 0;
     left: 0;
-    transition: all var(--speed) ease-in-out;
+    z-index: 1;
+    /* Optimized: only transition background-color */
+    transition: background-color var(--speed) ease-in-out;
+    will-change: background-color;
   }
 
-  .section1 {
-    background-image: url('{{ section.settings.image1 | img_url: 'master' }}');
-  }
   .section1::before {
     background-color: var(--section1-bg-color);
   }
 
-  .section2 {
-    background-image: url('{{ section.settings.image2 | img_url: 'master' }}');
-  }
   .section2::before {
     background-color: var(--section2-bg-color);
   }
 
-  .section3 {
-    background-image: url('{{ section.settings.image3 | img_url: 'master' }}');
-  }
   .section3::before {
     background-color: var(--section3-bg-color);
   }
 
-  .section4 {
-    background-image: url('{{ section.settings.image4 | img_url: 'master' }}');
-  }
   .section4::before {
     background-color: var(--section4-bg-color);
   }
 
-  .section5 {
-    background-image: url('{{ section.settings.image5 | img_url: 'master' }}');
-  }
   .section5::before {
     background-color: var(--section5-bg-color);
   }
@@ -214,49 +320,42 @@
   }
 </style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
+<script defer>
+(function() {
+  'use strict';
+
+  function init() {
     const sections = document.querySelectorAll('.split-section');
-    const isMobile = window.innerWidth <= 768;
-    
-    // Función para quitar la clase 'active' de todas las secciones
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    // Only add interaction on mobile
+    if (!isMobile) return;
+
     function resetActiveSections() {
-      sections.forEach(section => {
-        section.classList.remove('active');
-      });
+      sections.forEach(s => s.classList.remove('active'));
     }
-    
-    if (!isMobile) {
-      // En desktop, el zoom se maneja con :hover en CSS
-      sections.forEach(section => {
-        section.addEventListener('mouseenter', function() {
-          // No se requiere acción adicional
-        });
-      });
-    } else {
-      // En móviles, se usa el toque para activar el zoom
-      sections.forEach(section => {
-        section.addEventListener('click', function(event) {
-          if (this.classList.contains('active')) {
-            // Si ya está activo, se permite la navegación
-          } else {
-            event.preventDefault();
-            resetActiveSections();
-            this.classList.add('active');
-          }
-        });
-      });
-    }
-    
-    // Reiniciar el estado al cambiar el tamaño de la ventana
-    window.addEventListener('resize', function() {
-      const newIsMobile = window.innerWidth <= 768;
-      if (newIsMobile !== isMobile) {
+
+    // Mobile: tap to activate section
+    sections.forEach(section => {
+      section.addEventListener('click', function(event) {
+        if (this.classList.contains('active')) {
+          // Already active, allow navigation
+          return;
+        }
+        event.preventDefault();
         resetActiveSections();
-        location.reload();
-      }
+        this.classList.add('active');
+      }, { passive: false }); // passive: false because we use preventDefault
     });
-  });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 
 {% schema %}
