@@ -299,19 +299,56 @@
                   /* Responsive */
                   @media (max-width: 768px) {
                     .totachi-tabs-{{ block.id }} .tabs-header {
-                      flex-direction: column;
+                      display: flex;
+                      overflow-x: auto;
+                      -webkit-overflow-scrolling: touch;
+                      scrollbar-width: none;
+                      -ms-overflow-style: none;
+                    }
+
+                    .totachi-tabs-{{ block.id }} .tabs-header::-webkit-scrollbar {
+                      display: none;
                     }
 
                     .totachi-tabs-{{ block.id }} .tab-button {
+                      flex: 0 0 auto;
+                      min-width: 120px;
+                      padding: 12px 15px;
+                      font-size: 12px;
+                      white-space: nowrap;
+                      /* Mantener el clip-path poligonal */
+                      clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 0 100%);
+                      margin-right: -15px;
+                    }
+
+                    .totachi-tabs-{{ block.id }} .tab-button:last-child {
                       clip-path: none;
                       margin-right: 0;
-                      margin-bottom: 2px;
-                      padding: 15px 20px;
-                      font-size: 14px;
+                      padding-right: 20px;
                     }
 
                     .totachi-tabs-{{ block.id }} .tab-content {
                       padding: 20px;
+                    }
+                  }
+
+                  @media (max-width: 480px) {
+                    .totachi-tabs-{{ block.id }} .tab-button {
+                      min-width: 100px;
+                      padding: 10px 12px;
+                      font-size: 11px;
+                      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
+                      margin-right: -12px;
+                    }
+
+                    .totachi-tabs-{{ block.id }} .tab-button:last-child {
+                      clip-path: none;
+                      margin-right: 0;
+                    }
+
+                    .totachi-tabs-{{ block.id }} .tab-content {
+                      padding: 15px;
+                      min-height: 200px;
                     }
                   }
 
