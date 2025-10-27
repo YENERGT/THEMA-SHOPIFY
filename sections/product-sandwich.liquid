@@ -1,9 +1,9 @@
 {% comment %}
-  Sección Sandwich: Carruseles + Productos
-  - Carrusel superior (derecha a izquierda)
-  - Grid de productos en el medio
-  - Carrusel inferior (izquierda a derecha)
-  Optimizado para Core Web Vitals en móvil
+  Product Sandwich Section
+  - Carrusel superior (derecha → izquierda)
+  - Scroll horizontal de productos
+  - Carrusel inferior (izquierda → derecha)
+  Optimizado para Core Web Vitals
 {% endcomment %}
 
 {{ 'component-card.aio.min.css' | asset_url | stylesheet_tag }}
@@ -11,14 +11,14 @@
 
 <div class="product-sandwich-section section-{{ section.id }}-padding">
 
-  {%- comment -%} CARRUSEL SUPERIOR (Derecha a Izquierda) {%- endcomment -%}
-  <div class="carousel-wrapper carousel-top">
-    <div class="carousel-track carousel-track-rtl" style="animation-duration: {{ section.settings.carousel_speed }}s;">
+  {%- comment -%} CARRUSEL SUPERIOR (→) {%- endcomment -%}
+  <div class="carousel-wrapper">
+    <div class="carousel-track carousel-rtl" style="animation-duration: {{ section.settings.carousel_speed }}s;">
       {%- if section.settings.carousel_image != blank -%}
         {%- for i in (1..20) -%}
           <img
             src="{{ section.settings.carousel_image | image_url: width: 400 }}"
-            alt="Carousel decoration"
+            alt=""
             loading="lazy"
             decoding="async"
             class="carousel-image"
@@ -27,21 +27,19 @@
           >
         {%- endfor -%}
       {%- else -%}
-        {%- comment -%} Placeholder si no hay imagen {%- endcomment -%}
-        <div class="carousel-placeholder">No image selected</div>
+        <div class="carousel-placeholder">Agregar imagen del carrusel</div>
       {%- endif -%}
     </div>
   </div>
 
-  {%- comment -%} PRODUCTOS EN EL MEDIO - Scroll horizontal {%- endcomment -%}
-  <div class="product-sandwich-wrapper">
-    <div class="product-sandwich-scroll">
+  {%- comment -%} PRODUCTOS (Scroll Horizontal) {%- endcomment -%}
+  <div class="products-wrapper">
+    <div class="products-scroll" id="sandwich-scroll-{{ section.id }}">
       {%- for block in section.blocks -%}
         {%- if block.type == 'product' and block.settings.product != blank -%}
-          {%- assign product = block.settings.product -%}
-          <div class="product-sandwich-item" {{ block.shopify_attributes }}>
+          <div class="product-item" {{ block.shopify_attributes }}>
             {% render 'card-product',
-              card_product: product,
+              card_product: block.settings.product,
               media_aspect_ratio: section.settings.image_ratio,
               show_secondary_image: section.settings.show_secondary_image,
               show_vendor: section.settings.show_vendor,
@@ -53,14 +51,14 @@
     </div>
   </div>
 
-  {%- comment -%} CARRUSEL INFERIOR (Izquierda a Derecha) {%- endcomment -%}
-  <div class="carousel-wrapper carousel-bottom">
-    <div class="carousel-track carousel-track-ltr" style="animation-duration: {{ section.settings.carousel_speed }}s;">
+  {%- comment -%} CARRUSEL INFERIOR (←) {%- endcomment -%}
+  <div class="carousel-wrapper">
+    <div class="carousel-track carousel-ltr" style="animation-duration: {{ section.settings.carousel_speed }}s;">
       {%- if section.settings.carousel_image != blank -%}
         {%- for i in (1..20) -%}
           <img
             src="{{ section.settings.carousel_image | image_url: width: 400 }}"
-            alt="Carousel decoration"
+            alt=""
             loading="lazy"
             decoding="async"
             class="carousel-image"
@@ -69,8 +67,7 @@
           >
         {%- endfor -%}
       {%- else -%}
-        {%- comment -%} Placeholder si no hay imagen {%- endcomment -%}
-        <div class="carousel-placeholder">No image selected</div>
+        <div class="carousel-placeholder">Agregar imagen del carrusel</div>
       {%- endif -%}
     </div>
   </div>
@@ -78,11 +75,11 @@
 </div>
 
 <style>
-/* Aislamiento de estilos con prefijo único para evitar conflictos */
+/* === CONTENEDOR PRINCIPAL === */
 .product-sandwich-section {
   width: 100%;
   overflow: hidden;
-  isolation: isolate; /* Aísla estilos de otras secciones */
+  isolation: isolate;
 }
 
 .section-{{ section.id }}-padding {
@@ -97,12 +94,11 @@
   }
 }
 
-/* CARRUSEL STYLES - Prefijo específico para evitar conflictos */
+/* === CARRUSELES === */
 .product-sandwich-section .carousel-wrapper {
   width: 100%;
-  height: 1cm; /* 37.8px */
+  height: 1cm;
   overflow: hidden;
-  position: relative;
   background-color: {{ section.settings.carousel_bg_color }};
 }
 
@@ -110,38 +106,27 @@
   display: flex;
   height: 100%;
   width: max-content;
-  /* Hardware acceleration for smooth animation on mobile */
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
 }
 
-/* Animación: Derecha a Izquierda (RTL) */
-.product-sandwich-section .carousel-track-rtl {
-  animation: scrollRTL-{{ section.id }} linear infinite;
+.product-sandwich-section .carousel-rtl {
+  animation: carousel-rtl-{{ section.id }} linear infinite;
 }
 
-@keyframes scrollRTL-{{ section.id }} {
-  0% {
-    transform: translateX(0) translateZ(0);
-  }
-  100% {
-    transform: translateX(-50%) translateZ(0);
-  }
+.product-sandwich-section .carousel-ltr {
+  animation: carousel-ltr-{{ section.id }} linear infinite;
 }
 
-/* Animación: Izquierda a Derecha (LTR) */
-.product-sandwich-section .carousel-track-ltr {
-  animation: scrollLTR-{{ section.id }} linear infinite;
+@keyframes carousel-rtl-{{ section.id }} {
+  from { transform: translateX(0) translateZ(0); }
+  to { transform: translateX(-50%) translateZ(0); }
 }
 
-@keyframes scrollLTR-{{ section.id }} {
-  0% {
-    transform: translateX(-50%) translateZ(0);
-  }
-  100% {
-    transform: translateX(0) translateZ(0);
-  }
+@keyframes carousel-ltr-{{ section.id }} {
+  from { transform: translateX(-50%) translateZ(0); }
+  to { transform: translateX(0) translateZ(0); }
 }
 
 .product-sandwich-section .carousel-image {
@@ -161,15 +146,14 @@
   font-size: 0.8rem;
 }
 
-/* PRODUCTOS - Scroll horizontal con flechas */
-.product-sandwich-wrapper {
+/* === PRODUCTOS === */
+.products-wrapper {
   width: 100%;
   padding-top: {{ section.settings.spacing_top }}px;
   padding-bottom: {{ section.settings.spacing_bottom }}px;
-  overflow: hidden;
 }
 
-.product-sandwich-scroll {
+.products-scroll {
   display: flex;
   gap: 1.5rem;
   overflow-x: auto;
@@ -178,76 +162,75 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(var(--color-foreground), 0.3) transparent;
-  padding: 0 1.5rem;
-  justify-content: center; /* Centra los productos */
+
+  /* ARREGLADO: Padding solo a los lados para que primer producto sea visible */
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-/* Estilo de scrollbar para webkit */
-.product-sandwich-scroll::-webkit-scrollbar {
+/* Scrollbar webkit */
+.products-scroll::-webkit-scrollbar {
   height: 8px;
 }
 
-.product-sandwich-scroll::-webkit-scrollbar-track {
+.products-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.product-sandwich-scroll::-webkit-scrollbar-thumb {
+.products-scroll::-webkit-scrollbar-thumb {
   background-color: rgba(var(--color-foreground), 0.3);
   border-radius: 4px;
 }
 
-.product-sandwich-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(var(--color-foreground), 0.5);
-}
-
-.product-sandwich-item {
+.product-item {
   flex: 0 0 auto;
-  width: calc((100% - 1.5rem) / 2); /* 2 items en móvil */
+  width: calc(50% - 0.75rem); /* Móvil: 2 productos visibles */
   min-width: 200px;
   max-width: 350px;
 }
 
-/* Tablet: 3 items */
+/* === TABLET === */
 @media screen and (min-width: 750px) {
-  .product-sandwich-item {
-    width: calc((100% - 3rem) / 3);
+  .product-item {
+    width: calc(33.333% - 1rem);
   }
 }
 
-/* Desktop: Ajuste automático basado en cantidad de productos */
+/* === DESKTOP === */
 @media screen and (min-width: 990px) {
-  .product-sandwich-scroll {
-    padding: 0 2rem;
+  .products-scroll {
+    justify-content: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
-  /* Si hay 4 productos o menos, mostrarlos todos sin scroll */
-  .product-sandwich-scroll:has(.product-sandwich-item:nth-child(4):last-child) {
-    justify-content: center;
+  /* 4 productos: Todos visibles */
+  .products-scroll:has(.product-item:nth-child(4):last-child) {
     overflow-x: visible;
   }
 
-  .product-sandwich-scroll:has(.product-sandwich-item:nth-child(4):last-child) .product-sandwich-item {
-    width: calc((100% - 4.5rem) / 4);
+  .products-scroll:has(.product-item:nth-child(4):last-child) .product-item {
+    width: calc(25% - 1.125rem);
   }
 
-  /* 5 productos */
-  .product-sandwich-scroll:has(.product-sandwich-item:nth-child(5):last-child) .product-sandwich-item {
-    width: calc((100% - 6rem) / 5);
+  /* 5 productos: Todos visibles */
+  .products-scroll:has(.product-item:nth-child(5):last-child) .product-item {
+    width: calc(20% - 1.2rem);
   }
 
-  /* 6 productos */
-  .product-sandwich-scroll:has(.product-sandwich-item:nth-child(6):last-child) .product-sandwich-item {
-    width: calc((100% - 7.5rem) / 6);
+  /* 6 productos: Todos visibles */
+  .products-scroll:has(.product-item:nth-child(6):last-child) .product-item {
+    width: calc(16.666% - 1.25rem);
   }
 }
 
-/* Reduce motion for accessibility */
+/* === ACCESIBILIDAD === */
 @media (prefers-reduced-motion: reduce) {
   .product-sandwich-section .carousel-track {
     animation: none;
   }
 
-  .product-sandwich-scroll {
+  .products-scroll {
     scroll-behavior: auto;
   }
 }
@@ -262,18 +245,18 @@
   "settings": [
     {
       "type": "header",
-      "content": "Carrusel Settings"
+      "content": "Carrusel"
     },
     {
       "type": "image_picker",
       "id": "carousel_image",
       "label": "Imagen del carrusel",
-      "info": "Se repite horizontalmente. Recomendado: 400px de ancho"
+      "info": "Recomendado: 400px ancho × 40px alto"
     },
     {
       "type": "color",
       "id": "carousel_bg_color",
-      "label": "Color de fondo del carrusel",
+      "label": "Color de fondo",
       "default": "#000000"
     },
     {
@@ -283,13 +266,13 @@
       "max": 60,
       "step": 5,
       "unit": "s",
-      "label": "Velocidad del carrusel",
+      "label": "Velocidad",
       "default": 30,
-      "info": "Bajo: 50-60s, Medio: 25-35s, Alto: 10-20s"
+      "info": "Lento: 50-60s | Medio: 25-35s | Rápido: 10-20s"
     },
     {
       "type": "header",
-      "content": "Carousel Spacing"
+      "content": "Espaciado Carruseles"
     },
     {
       "type": "range",
@@ -298,9 +281,9 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Espacio entre carrusel superior y productos",
+      "label": "Arriba (carrusel → productos)",
       "default": 32,
-      "info": "0px = sin espacio, pegado al carrusel"
+      "info": "0px = sin espacio"
     },
     {
       "type": "range",
@@ -309,34 +292,13 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Espacio entre productos y carrusel inferior",
+      "label": "Abajo (productos → carrusel)",
       "default": 32,
-      "info": "0px = sin espacio, pegado al carrusel"
+      "info": "0px = sin espacio"
     },
     {
       "type": "header",
-      "content": "Product Grid Settings"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "min": 4,
-      "max": 6,
-      "step": 1,
-      "default": 4,
-      "label": "Columnas en desktop"
-    },
-    {
-      "type": "select",
-      "id": "columns_mobile",
-      "options": [
-        {
-          "value": "2",
-          "label": "2 columnas"
-        }
-      ],
-      "default": "2",
-      "label": "Columnas en móvil"
+      "content": "Productos"
     },
     {
       "type": "select",
@@ -344,41 +306,41 @@
       "options": [
         {
           "value": "adapt",
-          "label": "Adapt to image"
+          "label": "Adaptarse a imagen"
         },
         {
           "value": "portrait",
-          "label": "Portrait"
+          "label": "Retrato"
         },
         {
           "value": "square",
-          "label": "Square"
+          "label": "Cuadrado"
         }
       ],
       "default": "adapt",
-      "label": "Image ratio"
+      "label": "Proporción de imagen"
     },
     {
       "type": "checkbox",
       "id": "show_secondary_image",
       "default": false,
-      "label": "Show second image on hover"
+      "label": "Mostrar segunda imagen al pasar cursor"
     },
     {
       "type": "checkbox",
       "id": "show_vendor",
       "default": false,
-      "label": "Show vendor"
+      "label": "Mostrar marca"
     },
     {
       "type": "checkbox",
       "id": "show_rating",
       "default": false,
-      "label": "Show product rating"
+      "label": "Mostrar calificación"
     },
     {
       "type": "header",
-      "content": "Spacing"
+      "content": "Márgenes Sección"
     },
     {
       "type": "range",
@@ -387,7 +349,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding top",
+      "label": "Margen superior",
       "default": 36
     },
     {
@@ -397,19 +359,19 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding bottom",
+      "label": "Margen inferior",
       "default": 36
     }
   ],
   "blocks": [
     {
       "type": "product",
-      "name": "Product",
+      "name": "Producto",
       "settings": [
         {
           "type": "product",
           "id": "product",
-          "label": "Product"
+          "label": "Seleccionar producto"
         }
       ]
     }
@@ -417,7 +379,7 @@
   "presets": [
     {
       "name": "Product Sandwich",
-      "category": "Custom",
+      "category": "Productos",
       "blocks": [
         {
           "type": "product"
