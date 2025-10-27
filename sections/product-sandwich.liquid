@@ -1,0 +1,385 @@
+{% comment %}
+  Sección Sandwich: Carruseles + Productos
+  - Carrusel superior (derecha a izquierda)
+  - Grid de productos en el medio
+  - Carrusel inferior (izquierda a derecha)
+  Optimizado para Core Web Vitals en móvil
+{% endcomment %}
+
+{{ 'component-card.aio.min.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.aio.min.css' | asset_url | stylesheet_tag }}
+
+<div class="product-sandwich-section section-{{ section.id }}-padding">
+
+  {%- comment -%} CARRUSEL SUPERIOR (Derecha a Izquierda) {%- endcomment -%}
+  <div class="carousel-wrapper carousel-top">
+    <div class="carousel-track carousel-track-rtl" style="animation-duration: {{ section.settings.carousel_speed }}s;">
+      {%- if section.settings.carousel_image != blank -%}
+        {%- for i in (1..20) -%}
+          <img
+            src="{{ section.settings.carousel_image | image_url: width: 400 }}"
+            alt="Carousel decoration"
+            loading="lazy"
+            decoding="async"
+            class="carousel-image"
+            width="400"
+            height="38"
+          >
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Placeholder si no hay imagen {%- endcomment -%}
+        <div class="carousel-placeholder">{{ 'onboarding.no_content' | t }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} PRODUCTOS EN EL MEDIO {%- endcomment -%}
+  <div class="product-grid-wrapper page-width">
+    <div class="product-grid product-grid--{{ section.settings.columns_mobile }}-col-tablet-down product-grid--{{ section.settings.columns_desktop }}-col-desktop">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'product' and block.settings.product != blank -%}
+          {%- assign product = block.settings.product -%}
+          <div class="product-grid-item" {{ block.shopify_attributes }}>
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: section.settings.image_ratio,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating
+            %}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- comment -%} CARRUSEL INFERIOR (Izquierda a Derecha) {%- endcomment -%}
+  <div class="carousel-wrapper carousel-bottom">
+    <div class="carousel-track carousel-track-ltr" style="animation-duration: {{ section.settings.carousel_speed }}s;">
+      {%- if section.settings.carousel_image != blank -%}
+        {%- for i in (1..20) -%}
+          <img
+            src="{{ section.settings.carousel_image | image_url: width: 400 }}"
+            alt="Carousel decoration"
+            loading="lazy"
+            decoding="async"
+            class="carousel-image"
+            width="400"
+            height="38"
+          >
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Placeholder si no hay imagen {%- endcomment -%}
+        <div class="carousel-placeholder">{{ 'onboarding.no_content' | t }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+
+</div>
+
+<style>
+.product-sandwich-section {
+  width: 100%;
+  overflow: hidden;
+}
+
+.section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+}
+
+@media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+
+/* CARRUSEL STYLES */
+.carousel-wrapper {
+  width: 100%;
+  height: 1cm; /* 37.8px */
+  overflow: hidden;
+  position: relative;
+  background-color: {{ section.settings.carousel_bg_color }};
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  width: max-content;
+  /* Hardware acceleration for smooth animation on mobile */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Animación: Derecha a Izquierda (RTL) */
+.carousel-track-rtl {
+  animation: scrollRTL linear infinite;
+}
+
+@keyframes scrollRTL {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Animación: Izquierda a Derecha (LTR) */
+.carousel-track-ltr {
+  animation: scrollLTR linear infinite;
+}
+
+@keyframes scrollLTR {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.carousel-image {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.carousel-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(var(--color-foreground), 0.5);
+  font-size: 0.8rem;
+}
+
+/* PRODUCTOS EN EL MEDIO */
+.product-grid-wrapper {
+  padding: 2rem 0;
+}
+
+.product-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Mobile: 2 columns */
+.product-grid--2-col-tablet-down {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Tablet */
+@media screen and (min-width: 750px) {
+  .product-grid--3-col-tablet-down {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-grid--4-col-tablet-down {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 990px) {
+  .product-grid--4-col-desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .product-grid--5-col-desktop {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .product-grid--6-col-desktop {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .product-grid-wrapper {
+    padding: 3rem 0;
+  }
+}
+
+.product-grid-item {
+  width: 100%;
+}
+
+/* Pause animation on hover (desktop only) */
+@media (hover: hover) {
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    animation: none;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Product Sandwich",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Carrusel Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "carousel_image",
+      "label": "Imagen del carrusel",
+      "info": "Se repite horizontalmente. Recomendado: 400px de ancho"
+    },
+    {
+      "type": "color",
+      "id": "carousel_bg_color",
+      "label": "Color de fondo del carrusel",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "carousel_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Velocidad del carrusel",
+      "default": 30,
+      "info": "Bajo: 50-60s, Medio: 25-35s, Alto: 10-20s"
+    },
+    {
+      "type": "header",
+      "content": "Product Grid Settings"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 4,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "label": "Columnas en desktop"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 columnas"
+        }
+      ],
+      "default": "2",
+      "label": "Columnas en móvil"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image ratio"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "Show second image on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "Show product rating"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Sandwich",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
