@@ -207,6 +207,215 @@
                    {{ product.description }}
                     </h2>
                 {%- endif -%}
+              {%- when 'totachi_tabs' -%}
+                <style>
+                  .totachi-tabs-{{ block.id }} {
+                    max-width: 100%;
+                    margin: 30px 0;
+                    background-color: white;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tabs-header {
+                    display: flex;
+                    position: relative;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-button {
+                    flex: 1;
+                    padding: 20px 30px;
+                    background-color: #808080;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: bold;
+                    letter-spacing: 0.5px;
+                    transition: background-color 0.3s;
+                    position: relative;
+                    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 100%, 0 100%);
+                    margin-right: -20px;
+                    text-transform: uppercase;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-button:last-child {
+                    clip-path: none;
+                    margin-right: 0;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-button.active {
+                    background-color: #c8102e;
+                    z-index: 10;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-button:hover:not(.active) {
+                    background-color: #6a6a6a;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-content {
+                    padding: 40px;
+                    background-color: white;
+                    min-height: 300px;
+                    border-top: 3px solid #c8102e;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-pane {
+                    display: none;
+                    animation: fadeIn 0.3s;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-pane.active {
+                    display: block;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-pane p,
+                  .totachi-tabs-{{ block.id }} .tab-pane li {
+                    color: #333;
+                    line-height: 1.6;
+                    margin-bottom: 20px;
+                    font-size: 15px;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-pane ul {
+                    padding-left: 20px;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-pane h2 {
+                    font-size: 24px;
+                    margin-bottom: 15px;
+                    color: #000;
+                  }
+
+                  @keyframes fadeIn {
+                    from {
+                      opacity: 0;
+                      transform: translateY(-10px);
+                    }
+                    to {
+                      opacity: 1;
+                      transform: translateY(0);
+                    }
+                  }
+
+                  /* Responsive */
+                  @media (max-width: 768px) {
+                    .totachi-tabs-{{ block.id }} .tabs-header {
+                      flex-direction: column;
+                    }
+
+                    .totachi-tabs-{{ block.id }} .tab-button {
+                      clip-path: none;
+                      margin-right: 0;
+                      margin-bottom: 2px;
+                      padding: 15px 20px;
+                      font-size: 14px;
+                    }
+
+                    .totachi-tabs-{{ block.id }} .tab-content {
+                      padding: 20px;
+                    }
+                  }
+
+                  /* Accessibility */
+                  .totachi-tabs-{{ block.id }} .tab-button:focus {
+                    outline: 2px solid #2196F3;
+                    outline-offset: 2px;
+                  }
+
+                  .totachi-tabs-{{ block.id }} .tab-button:focus:not(:focus-visible) {
+                    outline: none;
+                  }
+                </style>
+
+                <div class="totachi-tabs-{{ block.id }} quick-add-hidden" {{ block.shopify_attributes }}>
+                  <div class="tabs-header" role="tablist">
+                    {%- assign tab_blocks = section.blocks | where: 'type', 'totachi_tab' -%}
+
+                    {%- comment -%} First tab is always Description {%- endcomment -%}
+                    <button
+                      class="tab-button active"
+                      role="tab"
+                      aria-selected="true"
+                      aria-controls="tab-description-{{ block.id }}"
+                      onclick="openTotachiTab(event, 'tab-description-{{ block.id }}', '{{ block.id }}')"
+                    >
+                      {{ block.settings.description_title | default: 'Description' | upcase }}
+                    </button>
+
+                    {%- for tab_block in tab_blocks -%}
+                      <button
+                        class="tab-button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="tab-{{ tab_block.id }}"
+                        onclick="openTotachiTab(event, 'tab-{{ tab_block.id }}', '{{ block.id }}')"
+                      >
+                        {{ tab_block.settings.tab_title | upcase }}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+
+                  <div class="tab-content">
+                    {%- comment -%} Description Tab Content - SEO optimized with H1 {%- endcomment -%}
+                    <div id="tab-description-{{ block.id }}" class="tab-pane active" role="tabpanel">
+                      <h1 class="visually-hidden">{{ product.title }} - {{ block.settings.description_title | default: 'Description' }}</h1>
+                      <div class="rte">
+                        {{ product.description }}
+                      </div>
+                    </div>
+
+                    {%- for tab_block in tab_blocks -%}
+                      <div id="tab-{{ tab_block.id }}" class="tab-pane" role="tabpanel">
+                        <h2 class="visually-hidden">{{ product.title }} - {{ tab_block.settings.tab_title }}</h2>
+                        <div class="rte">
+                          {{ tab_block.settings.content }}
+                        </div>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+
+                <script>
+                  function openTotachiTab(evt, tabName, blockId) {
+                    // Ocultar todos los tab-panes de este bloque
+                    var container = document.querySelector('.totachi-tabs-' + blockId);
+                    var tabPanes = container.getElementsByClassName("tab-pane");
+                    for (var i = 0; i < tabPanes.length; i++) {
+                      tabPanes[i].classList.remove("active");
+                    }
+
+                    // Remover la clase active de todos los botones
+                    var tabButtons = container.getElementsByClassName("tab-button");
+                    for (var i = 0; i < tabButtons.length; i++) {
+                      tabButtons[i].classList.remove("active");
+                      tabButtons[i].setAttribute('aria-selected', 'false');
+                    }
+
+                    // Mostrar el tab-pane seleccionado
+                    document.getElementById(tabName).classList.add("active");
+
+                    // Agregar la clase active al botón clickeado
+                    evt.currentTarget.classList.add("active");
+                    evt.currentTarget.setAttribute('aria-selected', 'true');
+                  }
+
+                  // Keyboard navigation
+                  document.addEventListener('DOMContentLoaded', function() {
+                    document.querySelectorAll('.totachi-tabs-{{ block.id }} .tab-button').forEach(function(button, index, buttons) {
+                      button.addEventListener('keydown', function(e) {
+                        let targetButton;
+                        if (e.key === 'ArrowRight') {
+                          targetButton = buttons[index + 1] || buttons[0];
+                        } else if (e.key === 'ArrowLeft') {
+                          targetButton = buttons[index - 1] || buttons[buttons.length - 1];
+                        }
+                        if (targetButton) {
+                          targetButton.click();
+                          targetButton.focus();
+                        }
+                      });
+                    });
+                  });
+                </script>
               {%- when 'sku' -%}
                 <p
                   class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -991,6 +1200,38 @@ El schema de AVADA incluye soporte para:
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
       "limit": 1
+    },
+    {
+      "type": "totachi_tabs",
+      "name": "Totachi Style Tabs",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "description_title",
+          "label": "Description Tab Title",
+          "default": "Description",
+          "info": "First tab always shows product description"
+        }
+      ]
+    },
+    {
+      "type": "totachi_tab",
+      "name": "Custom Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "default": "Application"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab Content",
+          "default": "<p>Add your custom tab content here.</p>"
+        }
+      ]
     },
     {
       "type": "share",
