@@ -164,7 +164,8 @@
 /* PRODUCTOS - Scroll horizontal con flechas */
 .product-sandwich-wrapper {
   width: 100%;
-  padding: 2rem 0;
+  padding-top: {{ section.settings.spacing_top }}px;
+  padding-bottom: {{ section.settings.spacing_bottom }}px;
   overflow: hidden;
 }
 
@@ -210,10 +211,6 @@
 @media screen and (min-width: 750px) {
   .product-sandwich-item {
     width: calc((100% - 3rem) / 3);
-  }
-
-  .product-sandwich-wrapper {
-    padding: 3rem 0;
   }
 }
 
@@ -289,6 +286,32 @@
       "label": "Velocidad del carrusel",
       "default": 30,
       "info": "Bajo: 50-60s, Medio: 25-35s, Alto: 10-20s"
+    },
+    {
+      "type": "header",
+      "content": "Carousel Spacing"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espacio entre carrusel superior y productos",
+      "default": 32,
+      "info": "0px = sin espacio, pegado al carrusel"
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espacio entre productos y carrusel inferior",
+      "default": 32,
+      "info": "0px = sin espacio, pegado al carrusel"
     },
     {
       "type": "header",
