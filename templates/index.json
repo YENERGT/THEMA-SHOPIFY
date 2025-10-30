@@ -230,7 +230,7 @@
         "title_spacing": 4,
         "carousel_image": "shopify://shop_images/totachi-logo-png_seeklogo-412232.jpg",
         "carousel_bg_color": "#e60707",
-        "carousel_speed": 30,
+        "carousel_speed": 50,
         "spacing_top": 0,
         "spacing_bottom": 0,
         "image_ratio": "square",
