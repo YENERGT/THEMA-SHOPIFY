@@ -20,21 +20,26 @@
     </div>
   {%- endif -%}
 
-  {%- comment -%} BANNER SUPERIOR (ESTÁTICO) {%- endcomment -%}
+  {%- comment -%} BANNER SUPERIOR (ESTÁTICO - IMÁGENES REPETIDAS) {%- endcomment -%}
   <div class="carousel-wrapper">
-    {%- if section.settings.carousel_image != blank -%}
-      <img
-        src="{{ section.settings.carousel_image | image_url: width: 2000 }}"
-        alt="{{ section.settings.section_title | default: 'Banner' }}"
-        loading="lazy"
-        decoding="async"
-        class="carousel-image-static"
-        width="2000"
-        height="38"
-      >
-    {%- else -%}
-      <div class="carousel-placeholder">Agregar imagen del banner</div>
-    {%- endif -%}
+    <div class="carousel-track-static">
+      {%- if section.settings.carousel_image != blank -%}
+        {%- comment -%} Repetir imágenes para llenar el ancho completo {%- endcomment -%}
+        {%- for i in (1..20) -%}
+          <img
+            src="{{ section.settings.carousel_image | image_url: width: 400 }}"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            class="carousel-image"
+            width="400"
+            height="38"
+          >
+        {%- endfor -%}
+      {%- else -%}
+        <div class="carousel-placeholder">Agregar imagen del banner</div>
+      {%- endif -%}
+    </div>
   </div>
 
   {%- comment -%} PRODUCTOS (Scroll Horizontal) {%- endcomment -%}
@@ -105,16 +110,19 @@
   height: 1cm;
   overflow: hidden;
   background-color: {{ section.settings.carousel_bg_color }};
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.product-sandwich-section .carousel-image-static {
-  width: 100%;
+.product-sandwich-section .carousel-track-static {
+  display: flex;
   height: 100%;
+  width: max-content;
+}
+
+.product-sandwich-section .carousel-image {
+  height: 100%;
+  width: auto;
   object-fit: cover;
-  object-position: center;
+  flex-shrink: 0;
 }
 
 .product-sandwich-section .carousel-placeholder {
@@ -288,7 +296,7 @@
       "type": "image_picker",
       "id": "carousel_image",
       "label": "Imagen del banner",
-      "info": "Recomendado: 2000px ancho × 40px alto (imagen ancha para pantallas grandes)"
+      "info": "Recomendado: 400px ancho × 40px alto. La imagen se repetirá horizontalmente"
     },
     {
       "type": "color",
