@@ -84,8 +84,8 @@
           "type": "totachi_tabs",
           "settings": {
             "description_title": "Description",
-            "application_title": "Application",
-            "requirements_title": "Meets Requirements"
+            "application_title": "Aplicación",
+            "requirements_title": "Cumple Requisitos"
           }
         },
         "share": {
