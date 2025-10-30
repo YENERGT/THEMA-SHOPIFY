@@ -22,7 +22,7 @@
 
   {%- comment -%} CARRUSEL SUPERIOR (→) {%- endcomment -%}
   <div class="carousel-wrapper">
-    <div class="carousel-track carousel-rtl" style="animation-duration: {{ section.settings.carousel_speed }}s;">
+    <div class="carousel-track carousel-rtl carousel-{{ section.id }}">
       {%- if section.settings.carousel_image != blank -%}
         {%- comment -%} Duplicar imágenes para loop infinito perfecto {%- endcomment -%}
         {%- for i in (1..40) -%}
@@ -121,8 +121,20 @@
   backface-visibility: hidden;
 }
 
+/* Velocidad móvil */
+.carousel-{{ section.id }} {
+  animation-duration: {{ section.settings.carousel_speed_mobile }}s;
+}
+
 .product-sandwich-section .carousel-rtl {
   animation: carousel-rtl-{{ section.id }} linear infinite;
+}
+
+/* Velocidad desktop */
+@media screen and (min-width: 750px) {
+  .carousel-{{ section.id }} {
+    animation-duration: {{ section.settings.carousel_speed_desktop }}s;
+  }
 }
 
 @keyframes carousel-rtl-{{ section.id }} {
@@ -318,14 +330,25 @@
     },
     {
       "type": "range",
-      "id": "carousel_speed",
+      "id": "carousel_speed_mobile",
       "min": 10,
       "max": 60,
       "step": 5,
       "unit": "s",
-      "label": "Velocidad",
+      "label": "Velocidad Móvil",
+      "default": 20,
+      "info": "Velocidad del carrusel en dispositivos móviles"
+    },
+    {
+      "type": "range",
+      "id": "carousel_speed_desktop",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Velocidad Desktop",
       "default": 30,
-      "info": "Lento: 50-60s | Medio: 25-35s | Rápido: 10-20s"
+      "info": "Velocidad del carrusel en pantallas grandes"
     },
     {
       "type": "header",
