@@ -365,6 +365,9 @@
 
                 <div class="totachi-tabs-{{ block.id }} quick-add-hidden" {{ block.shopify_attributes }}>
                   <div class="tabs-header" role="tablist">
+                    {%- comment -%} Check if product has metafields {%- endcomment -%}
+                    {%- assign has_application = product.metafields.custom.application -%}
+                    {%- assign has_requirements = product.metafields.custom.meets_requirements -%}
                     {%- assign tab_blocks = section.blocks | where: 'type', 'totachi_tab' -%}
 
                     {%- comment -%} First tab is always Description {%- endcomment -%}
@@ -378,6 +381,33 @@
                       {{ block.settings.description_title | default: 'Description' | upcase }}
                     </button>
 
+                    {%- comment -%} Application Tab from Metafield {%- endcomment -%}
+                    {%- if has_application != blank -%}
+                      <button
+                        class="tab-button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="tab-application-{{ block.id }}"
+                        onclick="openTotachiTab(event, 'tab-application-{{ block.id }}', '{{ block.id }}')"
+                      >
+                        {{ block.settings.application_title | default: 'Application' | upcase }}
+                      </button>
+                    {%- endif -%}
+
+                    {%- comment -%} Meets Requirements Tab from Metafield {%- endcomment -%}
+                    {%- if has_requirements != blank -%}
+                      <button
+                        class="tab-button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="tab-requirements-{{ block.id }}"
+                        onclick="openTotachiTab(event, 'tab-requirements-{{ block.id }}', '{{ block.id }}')"
+                      >
+                        {{ block.settings.requirements_title | default: 'Meets Requirements' | upcase }}
+                      </button>
+                    {%- endif -%}
+
+                    {%- comment -%} Additional custom tabs from blocks (backwards compatibility) {%- endcomment -%}
                     {%- for tab_block in tab_blocks -%}
                       <button
                         class="tab-button"
@@ -400,6 +430,27 @@
                       </div>
                     </div>
 
+                    {%- comment -%} Application Tab Content from Metafield {%- endcomment -%}
+                    {%- if has_application != blank -%}
+                      <div id="tab-application-{{ block.id }}" class="tab-pane" role="tabpanel">
+                        <h2 class="visually-hidden">{{ product.title }} - Application</h2>
+                        <div class="rte">
+                          {{ product.metafields.custom.application }}
+                        </div>
+                      </div>
+                    {%- endif -%}
+
+                    {%- comment -%} Meets Requirements Tab Content from Metafield {%- endcomment -%}
+                    {%- if has_requirements != blank -%}
+                      <div id="tab-requirements-{{ block.id }}" class="tab-pane" role="tabpanel">
+                        <h2 class="visually-hidden">{{ product.title }} - Meets Requirements</h2>
+                        <div class="rte">
+                          {{ product.metafields.custom.meets_requirements }}
+                        </div>
+                      </div>
+                    {%- endif -%}
+
+                    {%- comment -%} Additional custom tabs from blocks (backwards compatibility) {%- endcomment -%}
                     {%- for tab_block in tab_blocks -%}
                       <div id="tab-{{ tab_block.id }}" class="tab-pane" role="tabpanel">
                         <h2 class="visually-hidden">{{ product.title }} - {{ tab_block.settings.tab_title }}</h2>
@@ -1249,6 +1300,24 @@ El schema de AVADA incluye soporte para:
           "label": "Description Tab Title",
           "default": "Description",
           "info": "First tab always shows product description"
+        },
+        {
+          "type": "text",
+          "id": "application_title",
+          "label": "Application Tab Title",
+          "default": "Application",
+          "info": "Title for the Application tab (uses product metafield: custom.application)"
+        },
+        {
+          "type": "text",
+          "id": "requirements_title",
+          "label": "Meets Requirements Tab Title",
+          "default": "Meets Requirements",
+          "info": "Title for the Requirements tab (uses product metafield: custom.meets_requirements)"
+        },
+        {
+          "type": "paragraph",
+          "content": "To add Application and Meets Requirements content, go to the product page and fill in the custom metafields: 'Application' and 'Meets Requirements'. These will automatically appear as tabs if they have content."
         }
       ]
     },
