@@ -144,6 +144,42 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
+    "171323140900ce6753": {
+      "type": "apps",
+      "blocks": {
+        "revie_reviews_por_whatsapp_app_block_3_9mrdmy": {
+          "type": "shopify://apps/revie-reviews-por-whatsapp/blocks/app-block-3/32a49769-cfbe-4f29-8b19-1ae20fdb2abe",
+          "settings": {
+            "title": "Reviews",
+            "format": "3",
+            "title_color": "#000000",
+            "title_size": 16,
+            "title_pos": "center",
+            "star_color": "#969c00",
+            "size": 15,
+            "back_color": "#f5f5f5",
+            "text_color": "#000000",
+            "size_text": 10,
+            "name": "1",
+            "truncate": "1",
+            "max_reviews": 20,
+            "image": "1",
+            "from": "1",
+            "width_elements": 6,
+            "content_padding": 0,
+            "mobil_content_padding": 16,
+            "movil_count": "1.5",
+            "max_width": 2160
+          }
+        }
+      },
+      "block_order": [
+        "revie_reviews_por_whatsapp_app_block_3_9mrdmy"
+      ],
+      "settings": {
+        "include_margins": false
+      }
+    },
     "product_sandwich_eDVDR4": {
       "type": "product-sandwich",
       "blocks": {
@@ -198,42 +234,6 @@
         "show_rating": false,
         "padding_top": 0,
         "padding_bottom": 0
-      }
-    },
-    "171323140900ce6753": {
-      "type": "apps",
-      "blocks": {
-        "revie_reviews_por_whatsapp_app_block_3_9mrdmy": {
-          "type": "shopify://apps/revie-reviews-por-whatsapp/blocks/app-block-3/32a49769-cfbe-4f29-8b19-1ae20fdb2abe",
-          "settings": {
-            "title": "Reviews",
-            "format": "3",
-            "title_color": "#000000",
-            "title_size": 16,
-            "title_pos": "center",
-            "star_color": "#969c00",
-            "size": 15,
-            "back_color": "#f5f5f5",
-            "text_color": "#000000",
-            "size_text": 10,
-            "name": "1",
-            "truncate": "1",
-            "max_reviews": 20,
-            "image": "1",
-            "from": "1",
-            "width_elements": 6,
-            "content_padding": 0,
-            "mobil_content_padding": 16,
-            "movil_count": "1.5",
-            "max_width": 2160
-          }
-        }
-      },
-      "block_order": [
-        "revie_reviews_por_whatsapp_app_block_3_9mrdmy"
-      ],
-      "settings": {
-        "include_margins": false
       }
     },
     "custom_liquid_6b4zUC": {
@@ -317,8 +317,8 @@
     "loading_text_UPR3yx",
     "five_split_section_kRKVwN",
     "slideshow_KqGMMJ",
-    "product_sandwich_eDVDR4",
     "171323140900ce6753",
+    "product_sandwich_eDVDR4",
     "custom_liquid_6b4zUC",
     "custom_liquid_TQJDLp",
     "featured_collection_DwkTjk",
