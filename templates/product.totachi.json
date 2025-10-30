@@ -83,21 +83,9 @@
         "totachi_tabs": {
           "type": "totachi_tabs",
           "settings": {
-            "description_title": "Description"
-          }
-        },
-        "application_tab": {
-          "type": "totachi_tab",
-          "settings": {
-            "tab_title": "Application",
-            "content": "<p>Recommended for mixed fleets applications – diesel and gasoline engines. For new & old generation engines. Suitable for classic cars, trucks, light commercial vehicles, agricultural machineries and other on-road & off-road systems requiring a 15W-40 API CK-4 or API SP or ACEA E7or ACEA E11 engine oils.</p><p>For diesel engines meeting EURO I, II, III, IV, V and VI emission requirements. Backward compatible with API CJ-4, CI-4 PLUS, CI-4 CH-4, CG-4, CF-4, and older specs.</p>"
-          }
-        },
-        "requirements_tab": {
-          "type": "totachi_tab",
-          "settings": {
-            "tab_title": "Meets Requirements",
-            "content": "<ul><li>API CK-4/SP, CI-4 PLUS/SN PLUS</li><li>ACEA E7/E11</li><li>JASO DH-2</li><li>Caterpillar ECF-3</li><li>Ford WSS-M2C171-F1</li><li>Daimler Trucks DTFR 15C100</li><li>MB 228.31</li><li>MTU Type 2.1</li><li>Deutz DQC III-18 LA</li><li>Allison TES 439</li><li>Volvo VDS-4.5</li><li>Mack EOS-4.5</li><li>Renault Truck RLD-3</li><li>Cummins CES 20086/20087/20100</li><li>DFS 93K222/93K223</li><li>MAN M3775</li><li>CHINA D1</li></ul><p>Suitable for use in various OEMs for heavy loaded high-speed four stroke diesel and gasoline engines of on-road and off-road vehicles.</p><p>Before using this product, ensure it is consistent with OEM's recommendations for the equipment operating conditions and customer's maintenance practices.</p>"
+            "description_title": "Description",
+            "application_title": "Application",
+            "requirements_title": "Meets Requirements"
           }
         },
         "share": {
@@ -126,8 +114,6 @@
         "buy_buttons",
         "custom_liquid_Ed4pgn",
         "totachi_tabs",
-        "application_tab",
-        "requirements_tab",
         "share",
         "custom_liquid_f9Dm3y"
       ],
