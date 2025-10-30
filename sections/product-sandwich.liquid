@@ -121,18 +121,18 @@
   backface-visibility: hidden;
 }
 
-/* Velocidad móvil */
-.carousel-{{ section.id }} {
-  animation-duration: {{ section.settings.carousel_speed_mobile }}s;
-}
-
 .product-sandwich-section .carousel-rtl {
   animation: carousel-rtl-{{ section.id }} linear infinite;
 }
 
+/* Velocidad móvil */
+.product-sandwich-section .carousel-{{ section.id }} {
+  animation-duration: {{ section.settings.carousel_speed_mobile }}s;
+}
+
 /* Velocidad desktop */
 @media screen and (min-width: 750px) {
-  .carousel-{{ section.id }} {
+  .product-sandwich-section .carousel-{{ section.id }} {
     animation-duration: {{ section.settings.carousel_speed_desktop }}s;
   }
 }
