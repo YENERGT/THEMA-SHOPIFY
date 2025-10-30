@@ -24,7 +24,8 @@
   <div class="carousel-wrapper">
     <div class="carousel-track carousel-rtl" style="animation-duration: {{ section.settings.carousel_speed }}s;">
       {%- if section.settings.carousel_image != blank -%}
-        {%- for i in (1..20) -%}
+        {%- comment -%} Duplicar imágenes para loop infinito perfecto {%- endcomment -%}
+        {%- for i in (1..40) -%}
           <img
             src="{{ section.settings.carousel_image | image_url: width: 400 }}"
             alt=""
