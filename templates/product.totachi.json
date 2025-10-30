@@ -92,7 +92,7 @@
         "totachi_tabs": {
           "type": "totachi_tabs",
           "settings": {
-            "description_title": "Description",
+            "description_title": "Descripción",
             "application_title": "Aplicación",
             "requirements_title": "Cumple Requisitos"
           }
