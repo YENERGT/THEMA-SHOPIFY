@@ -1,8 +1,8 @@
 {% comment %}
   Product Sandwich Section
+  - Título editable
   - Carrusel superior (derecha → izquierda)
   - Scroll horizontal de productos
-  - Carrusel inferior (izquierda → derecha)
   Optimizado para Core Web Vitals
 {% endcomment %}
 
@@ -10,6 +10,15 @@
 {{ 'component-price.aio.min.css' | asset_url | stylesheet_tag }}
 
 <div class="product-sandwich-section section-{{ section.id }}-padding">
+
+  {%- comment -%} TÍTULO SECCIÓN {%- endcomment -%}
+  {%- if section.settings.section_title != blank -%}
+    <div class="sandwich-title-wrapper">
+      <h2 class="sandwich-title" style="font-size: {{ section.settings.title_size }}px;">
+        {{ section.settings.section_title }}
+      </h2>
+    </div>
+  {%- endif -%}
 
   {%- comment -%} CARRUSEL SUPERIOR (→) {%- endcomment -%}
   <div class="carousel-wrapper">
@@ -51,27 +60,6 @@
     </div>
   </div>
 
-  {%- comment -%} CARRUSEL INFERIOR (←) {%- endcomment -%}
-  <div class="carousel-wrapper">
-    <div class="carousel-track carousel-ltr" style="animation-duration: {{ section.settings.carousel_speed }}s;">
-      {%- if section.settings.carousel_image != blank -%}
-        {%- for i in (1..20) -%}
-          <img
-            src="{{ section.settings.carousel_image | image_url: width: 400 }}"
-            alt=""
-            loading="lazy"
-            decoding="async"
-            class="carousel-image"
-            width="400"
-            height="38"
-          >
-        {%- endfor -%}
-      {%- else -%}
-        <div class="carousel-placeholder">Agregar imagen del carrusel</div>
-      {%- endif -%}
-    </div>
-  </div>
-
 </div>
 
 <style>
@@ -91,6 +79,27 @@
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+
+/* === TÍTULO === */
+.sandwich-title-wrapper {
+  width: 100%;
+  text-align: {{ section.settings.title_alignment }};
+  padding: 0 1.5rem;
+  margin-bottom: {{ section.settings.title_spacing }}px;
+}
+
+.sandwich-title {
+  margin: 0;
+  color: {{ section.settings.title_color }};
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+@media screen and (min-width: 750px) {
+  .sandwich-title-wrapper {
+    padding: 0 2rem;
   }
 }
 
@@ -115,18 +124,9 @@
   animation: carousel-rtl-{{ section.id }} linear infinite;
 }
 
-.product-sandwich-section .carousel-ltr {
-  animation: carousel-ltr-{{ section.id }} linear infinite;
-}
-
 @keyframes carousel-rtl-{{ section.id }} {
   from { transform: translateX(0) translateZ(0); }
   to { transform: translateX(-50%) translateZ(0); }
-}
-
-@keyframes carousel-ltr-{{ section.id }} {
-  from { transform: translateX(-50%) translateZ(0); }
-  to { transform: translateX(0) translateZ(0); }
 }
 
 .product-sandwich-section .carousel-image {
@@ -243,6 +243,62 @@
   "class": "section",
   "max_blocks": 6,
   "settings": [
+    {
+      "type": "header",
+      "content": "Título de la Sección"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Título",
+      "default": "Productos Destacados"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño del título",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Alineación del título",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Espacio debajo del título",
+      "default": 24
+    },
     {
       "type": "header",
       "content": "Carrusel"
