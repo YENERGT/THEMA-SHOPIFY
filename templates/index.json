@@ -223,6 +223,11 @@
       ],
       "name": "Product Sandwich",
       "settings": {
+        "section_title": "TOTACHI 100% JAPONES",
+        "title_size": 16,
+        "title_color": "#000000",
+        "title_alignment": "center",
+        "title_spacing": 4,
         "carousel_image": "shopify://shop_images/totachi-logo-png_seeklogo-412232.jpg",
         "carousel_bg_color": "#e60707",
         "carousel_speed": 30,
