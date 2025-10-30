@@ -1,0 +1,276 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "revie_reviews_por_whatsapp_app_block_kNCiyE": {
+          "type": "shopify://apps/revie-reviews-por-whatsapp/blocks/app-block/32a49769-cfbe-4f29-8b19-1ae20fdb2abe",
+          "settings": {
+            "star_color": "#969c00",
+            "text_color": "#292929",
+            "star_text_2": "",
+            "size": 16,
+            "showcero": "2",
+            "format": "2",
+            "utm": "2"
+          }
+        },
+        "inventory_mnnrjt": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "uppercase",
+            "inventory_threshold": 5,
+            "show_inventory_quantity": true
+          }
+        },
+        "payment_methods_ATaGqp": {
+          "type": "payment_methods",
+          "settings": {
+            "alignment": "flex-start"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "subscriptions_app_block_kB8p9W": {
+          "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+          "settings": {
+            "color_text_body": "#6d7175",
+            "dividers_color": "#8f8d8d",
+            "bacgkround_color": "#ffffff",
+            "border_thickness": 1,
+            "border_radius": 0,
+            "subscription_policy_url": "",
+            "product": "{{product}}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "custom_liquid_Ed4pgn": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n    .shipping-container-v1 {\n        display: flex;\n        gap: 15px;\n        padding: 15px;\n        background: white;\n        border: 1px solid #ddd;\n        border-radius: 8px;\n        margin: 0 auto;\n        max-width: 1200px;\n    }\n    \n    .shipping-option-v1 {\n        flex: 1;\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding: 15px 10px;\n        border-radius: 6px;\n        cursor: pointer;\n        transition: all 0.3s ease;\n        background: #fafafa;\n    }\n    \n    .shipping-option-v1:hover {\n        background: #f0f0f0;\n        transform: translateY(-3px);\n        box-shadow: 0 4px 8px rgba(0,0,0,0.1);\n    }\n    \n    .shipping-option-v1 img {\n        width: 100%;\n        max-width: 120px;\n        height: 60px;\n        object-fit: contain;\n        margin: 0;\n    }\n    \n    .shipping-option-v1 .title {\n        font-size: 16px;\n        font-weight: 600;\n        color: #333;\n        margin: 10px 0 5px;\n        text-align: center;\n    }\n    \n    .shipping-option-v1 .time {\n        font-size: 13px;\n        color: #666;\n        background: #e8e8e8;\n        padding: 3px 10px;\n        border-radius: 12px;\n    }\n    \n    /* Responsive para móviles */\n    @media (max-width: 768px) {\n        .shipping-container-v1 {\n            padding: 10px;\n            gap: 10px;\n        }\n        \n        .shipping-option-v1 {\n            padding: 10px 5px;\n        }\n        \n        .shipping-option-v1 img {\n            max-width: 80px;\n            height: 50px;\n        }\n        \n        .shipping-option-v1 .title {\n            font-size: 14px;\n        }\n        \n        .shipping-option-v1 .time {\n            font-size: 11px;\n            padding: 2px 8px;\n        }\n    }\n    \n    @media (max-width: 480px) {\n        .shipping-option-v1 img {\n            max-width: 70px;\n            height: 40px;\n        }\n        \n        .shipping-option-v1 .title {\n            font-size: 12px;\n        }\n    }\n</style>\n\n<div class=\"shipping-container-v1\">\n    <div class=\"shipping-option-v1\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/logo-fde-PhotoRoom.jpg?v=1698203504\" alt=\"Nacional\">\n        <div class=\"title\">Envío Nacional</div>\n        <div class=\"time\">2-3 días</div>\n    </div>\n    <div class=\"shipping-option-v1\">\n        <img src=\"https://cdn-icons-png.flaticon.com/512/3063/3063822.png\" alt=\"Express\">\n        <div class=\"title\">Envío Express</div>\n        <div class=\"time\">24 horas</div>\n    </div>\n    <div class=\"shipping-option-v1\">\n        <img src=\"https://www.upv.es/upl/U0907964.png\" alt=\"Internacional\">\n        <div class=\"title\">Internacional</div>\n        <div class=\"time\">5-10 días</div>\n    </div>\n</div>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Compartir"
+          }
+        },
+        "custom_liquid_f9Dm3y": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n    .brands-carousel-v1 {\n        width: 100%;\n        overflow: hidden;\n        position: relative;\n        padding: 20px 0;\n        /* Sin fondo - completamente transparente */\n    }\n\n    .brands-title-v1 {\n        text-align: center;\n        font-size: 28px;\n        margin-bottom: 20px;\n        color: #333;\n        font-weight: 600;\n        position: relative;\n    }\n\n    .brands-title-v1::after {\n        content: '';\n        display: block;\n        width: 60px;\n        height: 3px;\n        background: #333;\n        margin: 10px auto 0;\n    }\n\n    .carousel-track-v1 {\n        display: flex;\n        animation: scroll-v1 30s linear infinite;\n        width: fit-content;\n    }\n\n    .brand-item-v1 {\n        flex-shrink: 0;\n        width: 120px;\n        height: 120px;\n        margin: 0 15px;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        background: rgba(255, 255, 255, 0.5); /* Fondo semi-transparente */\n        backdrop-filter: blur(10px);\n        border: 1px solid rgba(224, 224, 224, 0.5);\n        border-radius: 8px;\n        transition: all 0.3s ease;\n        cursor: pointer;\n    }\n\n    .brand-item-v1 img {\n        width: 90%;\n        height: 90%;\n        object-fit: contain;\n        filter: grayscale(100%);\n        opacity: 0.7;\n        transition: all 0.3s ease;\n    }\n\n    .brand-item-v1:hover {\n        background: rgba(255, 255, 255, 0.9);\n        border-color: #333;\n        transform: scale(1.05);\n        box-shadow: 0 5px 15px rgba(0,0,0,0.1);\n    }\n\n    .brand-item-v1:hover img {\n        filter: grayscale(0%);\n        opacity: 1;\n    }\n\n    @keyframes scroll-v1 {\n        0% { transform: translateX(0); }\n        100% { transform: translateX(-50%); }\n    }\n\n    /* Gradientes de fade con color F5F5F5 */\n    .brands-carousel-v1::before,\n    .brands-carousel-v1::after {\n        content: '';\n        position: absolute;\n        top: 0;\n        bottom: 0;\n        width: 100px;\n        z-index: 2;\n        pointer-events: none;\n    }\n\n    .brands-carousel-v1::before {\n        left: 0;\n        background: linear-gradient(to right, #F5F5F5, rgba(245,245,245,0));\n    }\n\n    .brands-carousel-v1::after {\n        right: 0;\n        background: linear-gradient(to left, #F5F5F5, rgba(245,245,245,0));\n    }\n\n    /* Responsive */\n    @media (max-width: 768px) {\n        .brand-item-v1 {\n            width: 90px;\n            height: 90px;\n            margin: 0 10px;\n        }\n        \n        .brands-title-v1 {\n            font-size: 24px;\n        }\n\n        .brands-carousel-v1::before,\n        .brands-carousel-v1::after {\n            width: 50px;\n        }\n    }\n\n    @media (max-width: 480px) {\n        .brand-item-v1 {\n            width: 70px;\n            height: 70px;\n            margin: 0 8px;\n        }\n        \n        .carousel-track-v1 {\n            animation-duration: 25s;\n        }\n    }\n</style>\n\n<div class=\"brands-title-v1\">Nuestras Marcas</div>\n<div class=\"brands-carousel-v1\">\n    <div class=\"carousel-track-v1\">\n        <!-- Primer set de logos -->\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Isuzu_new_logo-PhotoRoom.jpg?v=1698426819\" alt=\"Isuzu\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Mitsubishi_motors_new_logo-PhotoRoom.jpg?v=1698426806\" alt=\"Mitsubishi\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/toyota_new_logo-PhotoRoom.jpg?v=1698426827\" alt=\"Toyota\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Nissan_new_logo-PhotoRoom.jpg?v=1698428579\" alt=\"Nissan\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/denso_new_logo-PhotoRoom.jpg?v=1698428582\" alt=\"Denso\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/luk_new_logo-PhotoRoom.jpg?v=1698428594\" alt=\"LuK\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/ford_new_logo-PhotoRoom.jpg?v=1698428594\" alt=\"Ford\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/mazda_new_logo-PhotoRoom.jpg?v=1698428600\" alt=\"Mazda\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/bosh_new_logo-PhotoRoom.jpg?v=1698428605\" alt=\"Bosch\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-Hyundai-PhotoRoom.jpg?v=1698435069\" alt=\"Hyundai\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-kia-PhotoRoom.jpg?v=1698435072\" alt=\"KIA\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-delpki-PhotoRoom.jpg?v=1698435075\" alt=\"Delphi\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-continental-PhotoRoom.jpg?v=1698435083\" alt=\"Continental\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-tokico-PhotoRoom.jpg?v=1698435085\" alt=\"Tokico\"></div>\n        \n        <!-- Duplicado para efecto infinito -->\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Isuzu_new_logo-PhotoRoom.jpg?v=1698426819\" alt=\"Isuzu\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Mitsubishi_motors_new_logo-PhotoRoom.jpg?v=1698426806\" alt=\"Mitsubishi\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/toyota_new_logo-PhotoRoom.jpg?v=1698426827\" alt=\"Toyota\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Nissan_new_logo-PhotoRoom.jpg?v=1698428579\" alt=\"Nissan\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/denso_new_logo-PhotoRoom.jpg?v=1698428582\" alt=\"Denso\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/luk_new_logo-PhotoRoom.jpg?v=1698428594\" alt=\"LuK\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/ford_new_logo-PhotoRoom.jpg?v=1698428594\" alt=\"Ford\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/mazda_new_logo-PhotoRoom.jpg?v=1698428600\" alt=\"Mazda\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/bosh_new_logo-PhotoRoom.jpg?v=1698428605\" alt=\"Bosch\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-Hyundai-PhotoRoom.jpg?v=1698435069\" alt=\"Hyundai\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-kia-PhotoRoom.jpg?v=1698435072\" alt=\"KIA\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-delpki-PhotoRoom.jpg?v=1698435075\" alt=\"Delphi\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-continental-PhotoRoom.jpg?v=1698435083\" alt=\"Continental\"></div>\n        <div class=\"brand-item-v1\"><img src=\"https://cdn.shopify.com/s/files/1/0289/7264/6460/files/Logo-tokico-PhotoRoom.jpg?v=1698435085\" alt=\"Tokico\"></div>\n    </div>\n</div>"
+          }
+        },
+        "custom_liquid_kRjdNC": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "revie_reviews_por_whatsapp_app_block_kNCiyE",
+        "inventory_mnnrjt",
+        "payment_methods_ATaGqp",
+        "variant_picker",
+        "price",
+        "quantity_selector",
+        "subscriptions_app_block_kB8p9W",
+        "buy_buttons",
+        "custom_liquid_Ed4pgn",
+        "description",
+        "share",
+        "custom_liquid_f9Dm3y",
+        "custom_liquid_kRjdNC"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "hover",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 12,
+        "padding_bottom": 0
+      }
+    },
+    "1713234151272feccd": {
+      "type": "apps",
+      "blocks": {
+        "revie_reviews_por_whatsapp_app_block_3_7h7aCN": {
+          "type": "shopify://apps/revie-reviews-por-whatsapp/blocks/app-block-3/32a49769-cfbe-4f29-8b19-1ae20fdb2abe",
+          "disabled": true,
+          "settings": {
+            "title": "Reseñas",
+            "format": "3",
+            "title_color": "#000000",
+            "title_size": 24,
+            "title_pos": "center",
+            "star_color": "#969c00",
+            "size": 15,
+            "back_color": "#ffffff",
+            "text_color": "#000000",
+            "size_text": 11,
+            "name": "2",
+            "truncate": "1",
+            "max_reviews": 20,
+            "image": "1",
+            "from": "1",
+            "width_elements": 6,
+            "content_padding": 0,
+            "mobil_content_padding": 16,
+            "movil_count": "1.5",
+            "max_width": 1980
+          }
+        },
+        "revie_reviews_por_whatsapp_app_block_4_xpMDqD": {
+          "type": "shopify://apps/revie-reviews-por-whatsapp/blocks/app-block-4/32a49769-cfbe-4f29-8b19-1ae20fdb2abe",
+          "disabled": true,
+          "settings": {
+            "title": "{star} {count} Reviews",
+            "format": "1",
+            "image": "3",
+            "from": "2",
+            "onlinephotos": "2",
+            "title_color": "#000000",
+            "title_size": 26,
+            "title_pos": "center",
+            "date": true,
+            "star_color": "#000000",
+            "size": 15,
+            "back_color": "#ffffff",
+            "text_color": "#121212",
+            "size_text": 14,
+            "max_reviews": 5,
+            "nextButtonText": "Mostrar más reseñas",
+            "productButtonText": "Ver producto",
+            "max_width": 1260,
+            "content_padding": 0,
+            "max_width_image": 5
+          }
+        },
+        "revie_reviews_por_whatsapp_app_block_3_xDQhJU": {
+          "type": "shopify://apps/revie-reviews-por-whatsapp/blocks/app-block-3/32a49769-cfbe-4f29-8b19-1ae20fdb2abe",
+          "settings": {
+            "title": "Reviews {star} {count}",
+            "format": "3",
+            "title_color": "#000000",
+            "title_size": 17,
+            "title_pos": "center",
+            "star_color": "#000000",
+            "size": 15,
+            "back_color": "#ffffff",
+            "text_color": "#000000",
+            "size_text": 12,
+            "name": "2",
+            "truncate": "1",
+            "max_reviews": 20,
+            "image": "3",
+            "from": "2",
+            "width_elements": 3,
+            "content_padding": 0,
+            "mobil_content_padding": 16,
+            "movil_count": "1.5",
+            "max_width": 2160
+          }
+        }
+      },
+      "block_order": [
+        "revie_reviews_por_whatsapp_app_block_3_7h7aCN",
+        "revie_reviews_por_whatsapp_app_block_4_xpMDqD",
+        "revie_reviews_por_whatsapp_app_block_3_xDQhJU"
+      ],
+      "custom_css": [],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "custom_liquid_kTmVQn": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4008754641006705\"\n     crossorigin=\"anonymous\"></script>\n<!-- Primer bloque -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-4008754641006705\"\n     data-ad-slot=\"1602550263\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1713234151272feccd",
+    "related-products",
+    "custom_liquid_kTmVQn"
+  ]
+}
