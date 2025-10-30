@@ -435,7 +435,7 @@
                       <div id="tab-application-{{ block.id }}" class="tab-pane" role="tabpanel">
                         <h2 class="visually-hidden">{{ product.title }} - Application</h2>
                         <div class="rte">
-                          {{ product.metafields.custom.application.value }}
+                          {{ product.metafields.custom.application | metafield_tag }}
                         </div>
                       </div>
                     {%- endif -%}
@@ -445,7 +445,7 @@
                       <div id="tab-requirements-{{ block.id }}" class="tab-pane" role="tabpanel">
                         <h2 class="visually-hidden">{{ product.title }} - Meets Requirements</h2>
                         <div class="rte">
-                          {{ product.metafields.custom.meets_requirements.value }}
+                          {{ product.metafields.custom.meets_requirements | metafield_tag }}
                         </div>
                       </div>
                     {%- endif -%}
