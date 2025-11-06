@@ -1,9 +1,12 @@
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
   <head>
+    {% render 'collection-seo-optimizer' %}
 
      {% if template == 'index' %}
   <meta name="description" content="Repuestos diésel para Toyota, Ford, Mazda, Mitsubishi e Isuzu. Envíos desde Guatemala a todo el mundo.">
+{% elsif request.page_type == 'collection' and optimized_collection_description %}
+  <meta name="description" content="{{ optimized_collection_description | escape }}">
 {% elsif page_description %}
   <meta name="description" content="{{ page_description | escape }}">
 {% endif %}
@@ -22,10 +25,16 @@
 {%- endunless -%}
 
 <title>
-  {{ page_title }}
-  {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-  {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- if request.page_type == 'collection' and optimized_collection_title -%}
+    {{ optimized_collection_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Página {{ current_page }}{% endif -%}
+  {%- else -%}
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- endif -%}
 </title>
     
     {% render 'meta-tags' %}

@@ -1,0 +1,72 @@
+{%- comment -%}
+  Collection SEO Optimizer
+  Automatically optimizes collection titles and descriptions for SEO
+  with keywords like "repuestos", "Guatemala", brand names, etc.
+{%- endcomment -%}
+
+{%- if request.page_type == 'collection' -%}
+  {%- liquid
+    assign collection_title = collection.title
+    assign collection_desc = collection.description
+    assign store_name = 'REVISA'
+    assign location = 'Guatemala'
+
+    # Lista de marcas comunes para detectar colecciones de vehículos
+    assign vehicle_brands = 'ISUZU,MAZDA,TOYOTA,FORD,MITSUBISHI,NISSAN,CHEVROLET,HINO,HYUNDAI,KIA'
+    assign vehicle_brands_array = vehicle_brands | split: ','
+
+    # Lista de tipos de repuestos comunes
+    assign part_types = 'INYECTOR,RADIADOR,TURBO,MOTOR,TRANSMISION,FILTRO,BOMBA,VALVULA,SENSOR,ALTERNADOR,ARRANQUE,COMPRESOR,EMBRAGUE,SUSPENSION,FRENO'
+    assign part_types_array = part_types | split: ','
+
+    assign is_vehicle_collection = false
+    assign is_part_collection = false
+    assign collection_upper = collection_title | upcase
+
+    # Detectar si es una colección de vehículo
+    for brand in vehicle_brands_array
+      if collection_upper contains brand
+        assign is_vehicle_collection = true
+        break
+      endif
+    endfor
+
+    # Detectar si es una colección de repuesto
+    unless is_vehicle_collection
+      for part in part_types_array
+        if collection_upper contains part
+          assign is_part_collection = true
+          break
+        endif
+      endfor
+    endunless
+
+    # Generar título optimizado
+    if is_vehicle_collection
+      assign seo_title = 'Repuestos ' | append: collection_title | append: ' ' | append: location | append: ' | ' | append: store_name
+    elsif is_part_collection
+      assign seo_title = 'Repuestos ' | append: collection_title | append: ' ' | append: location | append: ' | ' | append: store_name
+    else
+      assign seo_title = collection_title | append: ' - Repuestos Diésel ' | append: location | append: ' | ' | append: store_name
+    endif
+
+    # Generar descripción optimizada
+    if collection_desc and collection_desc != blank
+      # Si ya existe una descripción, añadir keywords al final
+      assign seo_description = collection_desc | strip_html | truncatewords: 25
+      unless collection_desc contains location
+        assign seo_description = seo_description | append: ' Envíos desde ' | append: location | append: ' a todo el mundo.'
+      endunless
+    elsif is_vehicle_collection
+      assign seo_description = 'Repuestos originales y aftermarket para ' | append: collection_title | append: '. Inyectores, turbos, radiadores y más. Envíos desde ' | append: location | append: ' a todo el mundo.'
+    elsif is_part_collection
+      assign seo_description = 'Repuestos ' | append: collection_title | append: ' para Toyota, Ford, Mazda, Mitsubishi e Isuzu. Calidad garantizada. Envíos desde ' | append: location | append: ' a todo el mundo.'
+    else
+      assign seo_description = collection_title | append: ' - Repuestos diésel de alta calidad. Envíos desde ' | append: location | append: ' a todo el mundo.'
+    endif
+  -%}
+
+  {%- comment -%} Exportar variables para uso en theme.liquid {%- endcomment -%}
+  {%- assign optimized_collection_title = seo_title -%}
+  {%- assign optimized_collection_description = seo_description -%}
+{%- endif -%}

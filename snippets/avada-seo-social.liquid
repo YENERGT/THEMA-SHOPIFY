@@ -15,6 +15,16 @@
 {%- assign og_url = canonical_url -%}
 {%- assign og_title = page_title | default: shop.name -%}
 {%- assign og_description = page_description | default: shop.description | default: shop.name -%}
+
+{%- comment -%} Integrar SEO optimizado para colecciones {%- endcomment -%}
+{%- if request.page_type == 'collection' -%}
+  {%- if optimized_collection_title -%}
+    {%- assign og_title = optimized_collection_title -%}
+  {%- endif -%}
+  {%- if optimized_collection_description -%}
+    {%- assign og_description = optimized_collection_description -%}
+  {%- endif -%}
+{%- endif -%}
 {%- if request.page_type == 'product' -%}
   {%- assign metafieldsSocialPost = product.metafields.meta['social-post'] -%}
 {%- elsif request.page_type == 'article' -%}

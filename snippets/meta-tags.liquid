@@ -4,6 +4,16 @@
   assign og_type = 'website'
   assign og_description = page_description | default: shop.description | default: shop.name
 
+  # Usar títulos y descripciones optimizadas para colecciones
+  if request.page_type == 'collection'
+    if optimized_collection_title
+      assign og_title = optimized_collection_title
+    endif
+    if optimized_collection_description
+      assign og_description = optimized_collection_description
+    endif
+  endif
+
   if request.page_type == 'product'
     assign og_type = 'product'
   elsif request.page_type == 'article'
