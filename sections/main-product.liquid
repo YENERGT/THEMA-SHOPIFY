@@ -1056,6 +1056,47 @@ cambia de variante.
   </div>
 </product-info>
 
+{%- comment -%} HowTo Schema Auto-Detection for AI Optimization (GEO) {%- endcomment -%}
+{%- if product.description contains 'Paso 1' or product.description contains 'Step 1' or product.description contains '1.' or product.description contains 'Cómo instalar' or product.description contains 'How to install' or product.description contains 'Instalación' or product.description contains 'Installation' -%}
+  {%- comment -%} Auto-detect steps in product description {%- endcomment -%}
+  {%- assign steps_detected = false -%}
+  {%- assign description_lines = product.description | strip_html | split: '<br>' -%}
+  {%- assign step_count = 0 -%}
+
+  {%- for line in description_lines -%}
+    {%- if line contains 'Paso' or line contains 'Step' or line contains '1.' or line contains '2.' or line contains '3.' -%}
+      {%- assign step_count = step_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if step_count >= 2 -%}
+    {%- comment -%} Generate basic HowTo schema for products with steps {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Cómo instalar {{ product.title | strip_html | strip_newlines | strip }}",
+      "description": {{ product.description | strip_html | strip_newlines | truncate: 200 | strip | json }},
+      "image": {
+        "@type": "ImageObject",
+        "url": "https:{{ product.featured_image | image_url: width: 1200 }}",
+        "width": 1200,
+        "height": 1200
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Consultar especificaciones",
+          "text": "Revisar las especificaciones técnicas del producto y verificar compatibilidad con su vehículo."
+        }
+      ]
+    }
+    </script>
+  {%- endif -%}
+{%- endif -%}
+{%- comment -%} End HowTo Schema {%- endcomment -%}
+
 {%- comment -%}
 SCHEMA ELIMINADO - Ahora se gestiona centralmente en snippets/avada-seo-structured.liquid
 Esto evita duplicación y conflictos con Google Search Console

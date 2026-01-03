@@ -106,6 +106,29 @@
   </div>
 </div>
 
+{%- comment -%} FAQPage Schema for AI Optimization (GEO) {%- endcomment -%}
+{%- if section.blocks.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+    {
+      "@type": "Question",
+      "name": {{ block.settings.heading | default: block.settings.page.title | strip_html | strip_newlines | strip | json }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ block.settings.row_content | strip_html | strip_newlines | strip | json }}{% if block.settings.page.content %}{{ block.settings.page.content | strip_html | strip_newlines | strip | json }}{% endif %}
+      }
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+{%- comment -%} End FAQPage Schema {%- endcomment -%}
+
 {% schema %}
 {
   "name": "t:sections.collapsible_content.name",

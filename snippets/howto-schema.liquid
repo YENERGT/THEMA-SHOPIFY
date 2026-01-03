@@ -1,0 +1,50 @@
+{%- comment -%}
+  HowTo Schema for AI Optimization (GEO)
+
+  Usage: {% render 'howto-schema',
+            title: 'How to install this part',
+            description: 'Step by step guide',
+            steps: steps_array %}
+
+  Parameters:
+  - title: The title of the HowTo guide
+  - description: Brief description of what the guide accomplishes
+  - steps: Array of step objects with 'name' and 'text' properties
+  - image: Optional product image
+  - total_time: Optional total time in ISO 8601 duration format (e.g., "PT30M" for 30 minutes)
+{%- endcomment -%}
+
+{%- if title and steps.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": {{ title | strip_html | strip_newlines | strip | json }},
+  {%- if description -%}
+  "description": {{ description | strip_html | strip_newlines | strip | json }},
+  {%- endif -%}
+  {%- if image -%}
+  "image": {
+    "@type": "ImageObject",
+    "url": {{ image | image_url: width: 1200 | prepend: "https:" | json }},
+    "width": 1200,
+    "height": 1200
+  },
+  {%- endif -%}
+  {%- if total_time -%}
+  "totalTime": {{ total_time | json }},
+  {%- endif -%}
+  "step": [
+    {%- for step in steps -%}
+    {
+      "@type": "HowToStep",
+      "position": {{ forloop.index }},
+      "name": {{ step.name | strip_html | strip_newlines | strip | json }},
+      "text": {{ step.text | strip_html | strip_newlines | strip | json }},
+      "url": "{{ shop.url }}{{ request.path }}#step-{{ forloop.index }}"
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
