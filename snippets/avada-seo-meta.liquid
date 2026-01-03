@@ -1,5 +1,5 @@
 {%- assign avada_seo_ovr_product_ids = "9644290244883,9644295356691" -%}
-{%- assign avada_seo_ovr_collection_ids = "" -%}
+{%- assign avada_seo_ovr_collection_ids = "514260042003,465907482899" -%}
 {%- assign avada_seo_ovr_page_ids = "146063458579" -%}
   
 {%- if request.page_type == 'product' -%}
@@ -60,6 +60,80 @@
 {%- endcapture -%}
 {%- endif -%}
 {%- endif -%}
+{%- endif -%}
+
+<!-- meta basic type collection -->
+{%- if request.page_type == 'collection' -%}
+{%- unless avada_seo_ovr_collection_ids contains collection.id -%}
+{%- capture avada_seo_meta_title -%}
+{%- case shop.locale -%}
+{%- when "es" -%} 
+repuestos de {{ collection.title }}- guatemala 
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}
+{%- case shop.locale -%}
+{%- when "en" -%} 
+
+{%- when "pt-BR" -%} 
+
+{%- when "da" -%} 
+
+{%- when "nl" -%} 
+
+{%- when "fr" -%} 
+
+{%- when "de" -%} 
+
+{%- when "zh-CN" -%} 
+
+{%- when "es" -%} 
+{{ collection.title }} en {{ shop.name }}. Consultar precio y comprar online. ✓ Envío Gratis ✓ Contra Reembolso ✓ en guatemala
+{%- when "sv" -%} 
+
+{%- when "vi" -%} 
+
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- endunless -%}
+{%- endif -%}
+
+<!-- meta basic type article -->
+{%- if request.page_type == 'article' -%}
+{%- unless avada_seo_ovr_article_ids contains article.id -%}
+{%- capture avada_seo_meta_title -%}
+{%- case shop.locale -%}
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}
+{%- case shop.locale -%}
+{%- when "en" -%} 
+
+{%- when "pt-BR" -%} 
+
+{%- when "da" -%} 
+
+{%- when "nl" -%} 
+
+{%- when "fr" -%} 
+
+{%- when "de" -%} 
+
+{%- when "zh-CN" -%} 
+
+{%- when "es" -%} 
+
+{%- when "sv" -%} 
+
+{%- when "vi" -%} 
+
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- endunless -%}
 {%- endif -%}
 
 {%- if avada_seo_meta_title != blank -%}
