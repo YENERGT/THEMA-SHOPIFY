@@ -16,6 +16,15 @@
 <meta name="theme-color" content="">
 <link rel="canonical" href="{{ canonical_url }}">
 
+{%- comment -%} Meta robots para control de indexación {%- endcomment -%}
+{%- if request.page_type == 'search' or request.page_type == 'cart' -%}
+  <meta name="robots" content="noindex, follow">
+{%- elsif request.page_type == 'customers/account' or request.page_type == 'customers/order' -%}
+  <meta name="robots" content="noindex, nofollow">
+{%- else -%}
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+{%- endif -%}
+
 {%- if settings.favicon != blank -%}
   <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
 {%- endif -%}
